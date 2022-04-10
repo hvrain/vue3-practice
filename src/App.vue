@@ -29,6 +29,9 @@ export default {
       fruits: ["Apple", "Banana", "Cherry"]
     }
   },
+  created() {
+    console.log("hello")
+  },
   methods: {
     increase() {
       this.count += 1

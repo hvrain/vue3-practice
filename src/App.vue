@@ -1,50 +1,46 @@
-/* eslint-disable vue/require-v-for-key */
 <template>
   <h1 @click="increase">
-    {{ count }}
+    {{ count }} / {{ doubleCount }}
   </h1>
-  <div v-if="count > 4">
-    4보다 큽니다!!
-  </div>
-  <ul>
-    <Fruit
-      v-for="fruit in fruits"
-      :key="fruit"
-      :name="fruit">
-      {{ fruit }}
-    </Fruit>
-  </ul>
+  <h1 @click="changeMessage">
+    {{ message }} / {{ reversedMessage }}
+  </h1>
 </template>
 
 <script>
-import Fruit from "~/components/Fruit"
-
 export default {
-  components: {
-    Fruit
-  },
   data() {
     return {
       count: 0,
-      fruits: ["Apple", "Banana", "Cherry"]
+      message: "Hello World!"
     }
+  },
+  computed: {
+    doubleCount() {
+      return this.count * 2
+    },
+    reversedMessage() {
+      return this.message.split("").reverse().join("")
+    }
+  },
+  watch: {
+    message(value) {
+      console.log(value)
+    }
+  },
+  created() {
+    console.log("count:",this.doubleCount)
+  },
+  mounted() {
+    console.log("message:",this.message)
   },
   methods: {
     increase() {
       this.count += 1
+    },  
+    changeMessage() {
+      this.message = 'Good!'
     }
   }
 }
 </script>
-
-<style lang="scss">
-  h1 {
-    font-size: 50px;
-    color: royalblue;
-  }
-  ul {
-    li {
-      font-size: 40px;
-    }
-  }
-</style>
